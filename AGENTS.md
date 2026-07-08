@@ -11,10 +11,18 @@ this folder. Work normally unless the user flips the switch.
 ## When the user flips the switch
 
 If the user says any of these — `PAI on`, `PAI on:`, `Personal AI on`,
-`PAI remember:`, `PAI feedback:`, `PAI inbox:`, or asks to use the personal-ai
-context — read `ON.md` in this folder and follow its activation contract
-exactly. `ON.md` is the single source of truth for the loading order, capture
-commands, and skill selection; do not re-derive those steps from this file.
+`PAI setup`, `PAI remember:`, `PAI feedback:`, `PAI inbox:`, or asks to use
+the personal-ai context — read `ON.md` in this folder and follow its
+activation contract exactly. `ON.md` is the single source of truth for the
+loading order, capture commands, and skill selection; do not re-derive those
+steps from this file.
+
+## First-time users
+
+If the user says `PAI setup`, asks to get started, or seems new while the
+`assistant/` files still contain template prompts, use
+`skills/setup/SKILL.md` — a plain-language interview that fills in their
+personal files for them. Assume no technical background.
 
 ## PAI skills are workflow files
 

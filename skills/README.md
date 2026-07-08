@@ -27,6 +27,7 @@ skills/
 
 ## Skills
 
+- `setup`: first-run plain-language interview that fills in the user's personal files.
 - `personal-ai`: opt into this context for a request or session.
 - `weekly-review`: generate the Weekly PAI Review via the deterministic local tool.
 - `research`: run quick, standard, or deep source-backed research with evidence ledgers, linked artifacts, and verification gates.

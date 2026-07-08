@@ -24,7 +24,8 @@ PAI on: help me plan the next skill to add.
 ```
 
 The explicit capture commands `PAI remember:`, `PAI feedback:`, and
-`PAI inbox:` also activate this system for that capture.
+`PAI inbox:` also activate this system for that capture. `PAI setup` activates
+it and starts the first-run interview in `skills/setup/SKILL.md`.
 
 ## What The Assistant Should Do
 
@@ -103,6 +104,7 @@ The assistant should consider shared skills before improvising a workflow. A ski
 
 Examples:
 
+- `PAI setup` -> use `skills/setup/SKILL.md` (first-run interview; also offer it when `assistant/` still contains template prompts).
 - `PAI on: run my weekly review` -> use `skills/weekly-review/SKILL.md`.
 - `PAI on: extract wisdom from this podcast` -> use `skills/extract-wisdom/SKILL.md`.
 - `PAI on: research this decision` -> use `skills/research/SKILL.md`.
