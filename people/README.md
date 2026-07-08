@@ -7,7 +7,7 @@ Use this folder for people you interact with repeatedly.
 - Keep current relationships in `active/`.
 - Move relationships that no longer need regular call prep to `inactive/`.
 - Before a call, use the Personal AI website People / Calls buttons to copy a prep prompt.
-- After a call, use the update button and paste rough notes into Codex.
+- After a call, use the update button and paste rough notes into your assistant.
 
 ## Person File Pattern
 

@@ -20,11 +20,8 @@ PAI on: <your request>
 
 Codex should read `personal-ai/ON.md`, load the assistant context, and use relevant background, memory, or skills for that request. This keeps PAI opt-in rather than global.
 
-`PAI on` always refers to this repository's `personal-ai/` directory. Codex
-must read `personal-ai/assistant/` first and must not substitute
-`~/.claude/PAI`. That legacy directory is a read-only migration source and
-must not receive new or updated PAI material. If the canonical directory is
-unavailable, ask where it moved.
+`PAI on` always refers to this directory. Codex must read `assistant/`
+first. If the directory is unavailable, ask where it moved.
 
 ## Future Install Pattern
 

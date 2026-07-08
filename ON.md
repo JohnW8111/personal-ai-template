@@ -8,11 +8,8 @@ Use this file as the opt-in switch for the personal AI context.
 The first context layer is `personal-ai/assistant/`, and all Markdown files in
 that directory must be read before the request is interpreted.
 
-The older `~/.claude/PAI` directory is a read-only migration source. Do not
-write to it or maintain parallel facts, people notes, skills, or workflows
-there. Read it only when the user explicitly requests a legacy import or
-comparison. If this `personal-ai/` directory cannot be found, ask where it
-moved instead of silently substituting another PAI directory.
+If this `personal-ai/` directory cannot be found, ask where it moved
+instead of silently substituting another directory.
 
 ## Switch Phrase
 
@@ -33,7 +30,7 @@ The explicit capture commands `PAI remember:`, `PAI feedback:`, and
 
 When the user invokes `PAI on`, the assistant should:
 
-1. Resolve `PAI on` to this `personal-ai/` directory, never `~/.claude/PAI`.
+1. Resolve `PAI on` to this `personal-ai/` directory.
 2. Read every Markdown file in `personal-ai/assistant/` before interpreting the request.
 3. Read `personal-ai/skills/README.md` and decide whether a shared skill matches the request.
 4. If a skill matches, read that skill's `SKILL.md` and use it as the canonical workflow.

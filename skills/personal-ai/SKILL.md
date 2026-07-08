@@ -1,6 +1,6 @@
 ---
 name: personal-ai
-description: Opt into this repository's personal-ai context for a request or session. Use when the user says "PAI on", starts with "PAI on:", uses "PAI remember:", "PAI feedback:", or "PAI inbox:", says "Personal AI on", "use personal-ai", "use my Personal AI context", or asks to work from the personal-ai folder. This trigger never means the legacy ~/.claude/PAI system.
+description: Opt into this repository's personal-ai context for a request or session. Use when the user says "PAI on", starts with "PAI on:", uses "PAI remember:", "PAI feedback:", or "PAI inbox:", says "Personal AI on", "use personal-ai", "use my Personal AI context", or asks to work from the personal-ai folder.
 ---
 
 # Personal AI
@@ -32,8 +32,6 @@ the triggers, resolution rules, output behavior, and examples below live here.
 
 - `PAI on` resolves to the canonical `personal-ai/` root identified by the
   activation contract or installed adapter.
-- Never substitute `~/.claude/PAI`; it is a read-only migration source.
-- Never write new or updated PAI material to the legacy system.
 - If the canonical `personal-ai/` directory is unavailable, ask the user where
   it moved instead of guessing.
 

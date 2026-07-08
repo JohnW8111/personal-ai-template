@@ -2,13 +2,12 @@
 set -u
 
 SCRIPT_DIR="${0:A:h}"
-PROJECT_DIR="${SCRIPT_DIR:h}"
 URL="http://127.0.0.1:8765/"
 LOG_FILE="/tmp/personal-ai-ui.log"
 
-cd "$PROJECT_DIR" || {
-  echo "Could not find project directory:"
-  echo "$PROJECT_DIR"
+cd "$SCRIPT_DIR" || {
+  echo "Could not find the Personal AI folder:"
+  echo "$SCRIPT_DIR"
   read -k 1 "?Press any key to close..."
   exit 1
 }
@@ -22,8 +21,18 @@ if ! /usr/bin/curl -fsS "$URL" >/dev/null 2>&1; then
     PYTHON="$(command -v python)"
   fi
 
+  if ! "$PYTHON" -c "import fastapi, uvicorn" >/dev/null 2>&1; then
+    echo "Installing the website's requirements (first time only)..."
+    "$PYTHON" -m pip install -r ui/requirements.txt || {
+      echo "Could not install requirements. Try running this in Terminal:"
+      echo "  pip3 install -r ui/requirements.txt"
+      read -k 1 "?Press any key to close..."
+      exit 1
+    }
+  fi
+
   echo "Starting Personal AI..."
-  nohup "$PYTHON" personal-ai/ui/server.py >> "$LOG_FILE" 2>&1 &
+  nohup "$PYTHON" ui/server.py >> "$LOG_FILE" 2>&1 &
 
   for _ in {1..30}; do
     if /usr/bin/curl -fsS "$URL" >/dev/null 2>&1; then

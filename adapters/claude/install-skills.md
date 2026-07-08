@@ -22,21 +22,21 @@ PAI on: <your request>
 
 Claude should read `personal-ai/ON.md`, load the assistant context, and use relevant background, memory, or skills for that request. This keeps PAI opt-in rather than global.
 
-`PAI on` always refers to this repository's `personal-ai/` directory. Claude
-must read `personal-ai/assistant/` first and must not substitute its separate
-legacy `~/.claude/PAI` system. That legacy directory is a read-only migration
-source: never write new or updated PAI material there. If the canonical
-directory is unavailable, ask where it moved.
+`PAI on` always refers to this directory. Claude must read `assistant/`
+first. If the directory is unavailable, ask where it moved.
 
-## Installed Wrapper
+## Optional: Trigger PAI From Any Directory
 
-Claude Code discovers the PAI switch through a thin wrapper installed at
-`~/.claude/skills/PersonalAI/SKILL.md`. The wrapper contains only:
+Out of the box, the switch works whenever Claude Code is started inside this
+folder (its `CLAUDE.md` handles discovery). If you also want `PAI on` to work
+from anywhere on your computer, install a thin wrapper skill at
+`~/.claude/skills/PersonalAI/SKILL.md` containing only:
 
 1. Frontmatter with the trigger phrases (copied verbatim from the canonical
    skill's description; this is what Claude Code's auto-discovery reads).
 2. A pointer telling Claude to read and follow the canonical skill at
-   `personal-ai/skills/personal-ai/SKILL.md`.
+   `skills/personal-ai/SKILL.md` inside this folder (use the absolute path of
+   wherever you placed the folder).
 
 Do not add workflow instructions to the wrapper. When the canonical skill's
 trigger phrases change, update the wrapper's frontmatter to match; everything
