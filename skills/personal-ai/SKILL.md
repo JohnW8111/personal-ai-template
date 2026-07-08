@@ -1,0 +1,69 @@
+---
+name: personal-ai
+description: Opt into this repository's personal-ai context for a request or session. Use when the user says "PAI on", starts with "PAI on:", uses "PAI remember:", "PAI feedback:", or "PAI inbox:", says "Personal AI on", "use personal-ai", "use my Personal AI context", or asks to work from the personal-ai folder. This trigger never means the legacy ~/.claude/PAI system.
+---
+
+# Personal AI
+
+## Purpose
+
+Load the user's local Personal AI context only when requested.
+
+## Trigger Phrases
+
+- `PAI on`
+- `PAI remember:`
+- `PAI feedback:`
+- `PAI inbox:`
+- `Personal AI on`
+- `use personal-ai`
+- `use my Personal AI context`
+- `use the personal-ai skill`
+
+## Procedure
+
+Read `personal-ai/ON.md` and follow its activation contract exactly. `ON.md`
+is the single source of truth for the loading order, the capture commands
+(`PAI remember:`, `PAI feedback:`, `PAI inbox:`), substantial-task rules, and
+skill selection. Do not restate or re-derive the contract from this file; only
+the triggers, resolution rules, output behavior, and examples below live here.
+
+## System Resolution
+
+- `PAI on` resolves to the canonical `personal-ai/` root identified by the
+  activation contract or installed adapter.
+- Never substitute `~/.claude/PAI`; it is a read-only migration source.
+- Never write new or updated PAI material to the legacy system.
+- If the canonical `personal-ai/` directory is unavailable, ask the user where
+  it moved instead of guessing.
+
+## Output Behavior
+
+- Briefly confirm: `PAI context loaded.`
+- Do not dump the context back to the user.
+- Do not treat this as global unless the user keeps using the switch.
+- If the user says `PAI off` or `Personal AI off`, stop using this context unless asked again.
+
+## Boundaries
+
+Follow `personal-ai/assistant/boundaries.md`.
+
+## Examples
+
+### Normal Case
+
+Request: `PAI on: help me improve the weekly review.`
+
+Behavior: Load relevant assistant context, decisions, and the matching local files; define success criteria if the work is substantial; then implement and verify the improvement.
+
+### Difficult Or Ambiguous Case
+
+Request: `PAI on: make the system more proactive.`
+
+Behavior: Use existing priorities and boundaries to propose a small, reversible interpretation of proactive behavior. Avoid broad autonomy and surface assumptions that materially affect the design.
+
+### Stop Or Request Approval
+
+Request: `PAI on: send my private project summary to everyone involved.`
+
+Behavior: Prepare a draft if useful, but stop before external communication. Follow the explicit-approval and privacy rules in `assistant/boundaries.md`.

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Personal AI</title>
+    <link rel="stylesheet" href="/static/app.css?v=categories-compact-1" />
+  </head>
+  <body>
+    <main class="shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div>
+            <h1>Personal AI</h1>
+            <p id="rootPath">Loading local files...</p>
+          </div>
+        </div>
+
+        <div class="tools">
+          <button id="reviewCandidatesButton" class="primary-button review-button" type="button">
+            Review skills
+          </button>
+          <a class="secondary-button link-button" href="/briefings/latest" target="_blank" rel="noreferrer">
+            Latest morning briefing
+          </a>
+          <a class="secondary-button link-button" href="/pai-review/latest" target="_blank" rel="noreferrer">
+            Latest PAI review
+          </a>
+          <section class="capture-card" aria-label="Quick idea capture">
+            <div>
+              <span>Quick Capture</span>
+              <p>Capture quickly, classify later, retain selectively.</p>
+            </div>
+            <textarea id="inboxThought" class="capture-input" rows="3" placeholder="What idea do you want to remember?"></textarea>
+            <button id="addInboxButton" class="primary-button compact-button" type="button">Add idea</button>
+          </section>
+          <section class="call-card" aria-label="People and calls">
+            <div>
+              <span>People / Calls</span>
+              <p>Pick a person, then copy the prompt you need.</p>
+            </div>
+            <select id="personSelect" aria-label="Person"></select>
+            <div class="call-actions">
+              <button id="openPersonButton" class="secondary-button compact-button" type="button" disabled>Open</button>
+              <button id="prepCallButton" class="primary-button compact-button" type="button" disabled>Prep</button>
+              <button id="updateCallButton" class="secondary-button compact-button" type="button" disabled>Update</button>
+            </div>
+            <textarea id="promptOutput" class="prompt-output" readonly placeholder="Prompt appears here after Prep or Update."></textarea>
+            <button id="copyPromptButton" class="secondary-button compact-button" type="button" disabled>Copy prompt</button>
+            <button id="newPersonButton" class="secondary-button compact-button" type="button">New person</button>
+          </section>
+          <label class="search-label" for="searchInput">Search</label>
+          <input id="searchInput" type="search" placeholder="Find files or text" autocomplete="off" />
+          <button id="newNoteButton" class="secondary-button" type="button">New note</button>
+        </div>
+
+        <nav id="fileList" class="file-list" aria-label="Personal AI files"></nav>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <p id="sectionLabel" class="eyebrow">Select a file</p>
+            <h2 id="fileTitle">Personal AI</h2>
+            <p id="filePath" class="path">Choose a Markdown file from the sidebar.</p>
+          </div>
+          <div class="actions">
+            <button id="toggleEditButton" class="secondary-button" type="button" disabled>Edit</button>
+            <button id="reloadButton" class="secondary-button edit-control hidden" type="button" disabled>Reload</button>
+            <button id="saveButton" class="primary-button edit-control hidden" type="button" disabled>Save</button>
+          </div>
+        </header>
+
+        <div id="status" class="status" role="status">Ready</div>
+
+        <div id="editorGrid" class="editor-grid preview-only">
+          <section class="pane edit-pane">
+            <div class="pane-header">
+              <h3>Edit</h3>
+              <span id="dirtyBadge" class="badge hidden">Unsaved</span>
+            </div>
+            <textarea id="editor" spellcheck="true" placeholder="Select a file to edit."></textarea>
+          </section>
+
+          <section class="pane preview-pane">
+            <div class="pane-header">
+              <h3>Preview</h3>
+            </div>
+            <article id="preview" class="preview">
+              <p>Select a file to preview it here.</p>
+            </article>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script src="/static/app.js?v=categories-compact-1"></script>
+  </body>
+</html>
