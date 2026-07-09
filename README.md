@@ -25,10 +25,14 @@ you need. No other software, and no technical skills.
 
 **Step 1 — Get your copy of this folder.**
 On this project's GitHub page, click the green **Code** button, then choose
-**Download ZIP**. Open your Downloads folder and double-click the ZIP file —
-it becomes a normal folder. Move that whole folder somewhere easy to find,
-like your **Documents** folder, and feel free to rename it something friendly,
-like `Personal AI`. (You move the whole folder — never just one file out of it.)
+**Download ZIP**. This is the recommended way to get your personal copy. Do
+not use Fork, clone, or "Use this template" unless you already understand
+GitHub and know how to keep your filled-in copy private.
+
+Open your Downloads folder and double-click the ZIP file — it becomes a normal
+folder. Move that whole folder somewhere easy to find, like your **Documents**
+folder, and feel free to rename it something friendly, like `Personal AI`. (You
+move the whole folder — never just one file out of it.)
 
 **Step 2 — Connect your AI app to the folder.**
 - **Claude desktop app**: open Cowork and, when it asks which folder to work
@@ -115,6 +119,8 @@ your filled-in copy like a diary:
 
 - Keep it on your own computer.
 - Don't upload it, share it, or put it anywhere public.
+- Don't put the filled-in folder in a shared cloud folder unless you are sure
+  it is private.
 - The assistant's ground rules (in `assistant/boundaries.md`) require your
   explicit approval before anything is ever sent, posted, spent, or published.
 

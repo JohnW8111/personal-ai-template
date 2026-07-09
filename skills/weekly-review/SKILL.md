@@ -31,12 +31,13 @@ the review.
    `assistant/current-context.md`, `background/projects.md`, and the configured
    podcast transcription source.
 3. After writing the review, the script keeps only the 2 most recent review
-   files and deletes older ones, then auto-commits any uncommitted changes
-   under `personal-ai/` to the enclosing local git repository (message:
-   `Weekly PAI review auto-commit YYYY-MM-DD`). Pruned reviews remain
-   retrievable from git history. The commit touches only paths inside
-   `personal-ai/` and the script reports what it did (committed, nothing to
-   commit, or no repository found).
+   files and deletes older ones. Optionally, it can also auto-commit any
+   uncommitted changes in this folder to a local git repository (message:
+   `Weekly PAI review auto-commit YYYY-MM-DD`); this is off by default and
+   enabled by setting the environment variable
+   `PAI_WEEKLY_REVIEW_AUTO_COMMIT=1`. When enabled, the commit touches only
+   paths inside this folder and the script reports what it did (committed,
+   nothing to commit, or no repository found).
 4. Open the generated file and act on the "Suggested Attention This Week" items:
    follow up on stale people, triage inbox ideas, repair missing memory paths,
    merge duplicate decisions, and review recently completed work for durable

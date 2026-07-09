@@ -695,7 +695,11 @@ def prune_reviews(keep: int = 2) -> None:
 
 
 def commit_personal_ai(today: date) -> None:
-    """Auto-commit personal-ai/ so the weekly review doubles as a git checkpoint."""
+    """Optional git checkpoint for advanced users who explicitly enable it."""
+
+    if os.environ.get("PAI_WEEKLY_REVIEW_AUTO_COMMIT") != "1":
+        print("Auto-commit skipped: set PAI_WEEKLY_REVIEW_AUTO_COMMIT=1 to enable.")
+        return
 
     def git(*args: str) -> subprocess.CompletedProcess[str]:
         return subprocess.run(
