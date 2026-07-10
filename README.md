@@ -5,9 +5,11 @@ are, what you care about, and what you're working on — so you stop
 re-introducing yourself in every conversation.
 
 It is deliberately simple: **a folder of ordinary files that lives on your own
-computer.** There is no account to create, nothing to install beyond the AI
-app you already use, and nothing stored in the cloud. Your AI assistant reads
-the folder when — and only when — you ask it to.
+computer.** There is no separate Personal AI account to create and nothing to
+install beyond the AI app you already use. Your Personal AI files stay in this
+folder on your computer; the AI app you choose may process conversations and
+files you make available under its own privacy settings. Your AI assistant
+uses the folder when — and only when — you ask it to.
 
 We call the system **PAI** (Personal AI) for short.
 
@@ -45,8 +47,8 @@ whole folder — never just one file out of it.)
   your files, so Personal AI will not work there. Then choose the folder you
   just moved as the place to work.
 
-The connection is per session — when you come back tomorrow, pick the same
-folder again.
+The folder connection is per session — when you come back tomorrow, pick the
+same folder again and type `PAI on` when you want to use it.
 
 **Step 3 — Let the assistant interview you.**
 In the chat, type:
@@ -70,19 +72,23 @@ PAI on: introduce yourself and tell me what you know about me.
 ## How to turn it on and off
 
 The system is **off by default**. Your assistant behaves completely normally
-until you type the on-switch. Nothing about you is loaded behind your back.
+until you type the on-switch. Once you turn it on, it stays on for that
+workspace conversation until you type `PAI off`. A new conversation starts
+off again. Nothing about you is loaded behind your back.
 
 | You type | What happens |
 |---|---|
 | `PAI on` or `PAI on: <request>` | The assistant reads your personal files, then helps using what it knows about you. |
-| `PAI off` | The assistant stops using your personal files and goes back to normal. |
-| `PAI remember: <something>` | Saves one fact, preference, or decision — the **only** way the assistant records lasting memory about you. |
+| `PAI off` | The assistant stops reading or using Personal AI files in future requests in this conversation. Start a new conversation for a clean separation from material already discussed. |
+| `PAI remember: <something>` | Saves one durable fact, preference, decision, or lesson about you. |
 | `PAI inbox: <a thought>` | Jots an idea down to sort out later. |
 | `PAI feedback: pass` or `PAI feedback: fail - <why>` | Tells the system what worked and what didn't, so it improves. |
 
-Two protections are built in: the assistant never records memory about you
-unless you explicitly say `PAI remember:`, and it never follows instructions
-it finds inside web pages or documents — only yours.
+Two protections are built in: the assistant never turns ordinary conversation
+into durable memory. `PAI setup`, `PAI remember:`, `PAI inbox:`, and `PAI
+feedback:` each write only the specific information you explicitly ask them to
+capture. It also never follows instructions it finds inside web pages or
+documents — only yours.
 
 ## Everyday examples
 

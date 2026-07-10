@@ -1,6 +1,6 @@
 ---
 name: weekly-review
-description: Generate the Weekly PAI Review - a dated digest of people to follow up, active work, memory maintenance, explicit feedback, inbox triage, current context, projects, podcast signals, and recent edits. Use when asked for the weekly review, weekly PAI review, PAI review, weekly digest, or a periodic check of the Personal AI system.
+description: Generate the Weekly PAI Review - a dated digest of people to follow up, active work, memory maintenance, explicit feedback, inbox triage, current context, projects, and recent edits. Use when asked for the weekly review, weekly PAI review, PAI review, weekly digest, or a periodic check of the Personal AI system.
 ---
 
 # Weekly Review
@@ -28,30 +28,17 @@ the review.
 2. The script writes `reviews/YYYY-MM-DD-weekly-pai-review.md` and
    prints the path. It reads `people/active/`, `work/active/`,
    `work/completed/`, `memory/`, `inbox/README.md`,
-   `assistant/current-context.md`, `background/projects.md`, and the configured
-   podcast transcription source.
-3. After writing the review, the script keeps only the 2 most recent review
-   files and deletes older ones. Optionally, it can also auto-commit any
-   uncommitted changes in this folder to a local git repository (message:
-   `Weekly PAI review auto-commit YYYY-MM-DD`); this is off by default and
-   enabled by setting the environment variable
-   `PAI_WEEKLY_REVIEW_AUTO_COMMIT=1`. When enabled, the commit touches only
-   paths inside this folder and the script reports what it did (committed,
-   nothing to commit, or no repository found).
-4. Open the generated file and act on the "Suggested Attention This Week" items:
+   `assistant/current-context.md`, and `background/projects.md`. It keeps prior
+   reviews; nothing is deleted or committed automatically.
+3. Open the generated file and act on the "Suggested Attention This Week" items:
    follow up on stale people, triage inbox ideas, repair missing memory paths,
    merge duplicate decisions, and review recently completed work for durable
    lessons.
-5. Close the loop. When the review flags something, resolve it (or consciously
+4. Close the loop. When the review flags something, resolve it (or consciously
    defer it) so the same flag does not recur week after week.
 
 ## Inputs And Configuration
 
-- Podcast signals require the transcription source at
-  the path configured in `tools/weekly_review.py`
-  (default `~/podcast-transcripts/data`), overridable
-  with the `PAI_TRANSCRIPTION_DATA_ROOT` environment variable. A missing source
-  is reported, not silently treated as empty.
 - Person files must keep an accurate `## Last Call` `Date:` so follow-up timing
   is correct.
 - Work files should follow `work/README.md`'s template (`Status:`, `Updated:`,
@@ -65,8 +52,6 @@ A single dated Markdown review under `reviews/`.
 
 - The dated review file exists at the printed path.
 - People follow-up timing matches the `Last Call` dates in `people/active/`.
-- The podcast section reports "available" or explicitly states the source is
-  missing.
 - Flagged items are acted on or deliberately deferred, not ignored.
 
 ## Agent Notes

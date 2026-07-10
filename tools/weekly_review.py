@@ -1,71 +1,12 @@
 from __future__ import annotations
 
-import os
 import re
-import subprocess
 from datetime import date, datetime, timedelta
 from pathlib import Path
 
 
 PERSONAL_AI_ROOT = Path(__file__).resolve().parents[1]
 REVIEWS_ROOT = PERSONAL_AI_ROOT / "reviews"
-# Customize this to your podcast transcript folder, or set PAI_TRANSCRIPTION_DATA_ROOT.
-DEFAULT_TRANSCRIPTION_DATA_ROOT = Path("~/podcast-transcripts/data")
-TRANSCRIPTION_DATA_ROOT = Path(
-    os.environ.get("PAI_TRANSCRIPTION_DATA_ROOT", str(DEFAULT_TRANSCRIPTION_DATA_ROOT))
-).expanduser()
-
-PAI_PODCAST_KEYWORDS = {
-    "personal ai": 9,
-    "digital assistant": 9,
-    "super assistant": 8,
-    "personal agent": 9,
-    "agent trust": 9,
-    "zero trust": 9,
-    "least agency": 9,
-    "assistant": 5,
-    "proactive": 8,
-    "memory": 7,
-    "memory poisoning": 9,
-    "persistent context": 8,
-    "context": 4,
-    "context manipulation": 8,
-    "workflow": 5,
-    "workflows": 5,
-    "agent": 4,
-    "agents": 4,
-    "coding agent": 6,
-    "ai agent": 5,
-    "automation": 5,
-    "automate": 5,
-    "autonomous": 4,
-    "human-in-the-loop": 7,
-    "governance": 6,
-    "guardrails": 6,
-    "prompt injection": 9,
-    "red-team": 8,
-    "red teaming": 8,
-    "evaluation": 4,
-    "evals": 5,
-    "validation": 5,
-    "verification": 6,
-    "reliable": 3,
-    "reliability": 3,
-    "calibration": 6,
-    "trust": 3,
-    "policy": 3,
-    "security": 4,
-    "permissions": 5,
-    "identity": 4,
-    "file system": 5,
-    "files": 2,
-    "knowledge": 3,
-    "world model": 7,
-    "reasoning": 4,
-    "certificate": 6,
-    "second brain": 8,
-    "agent os": 8,
-}
 
 
 def read_text(path: Path) -> str:
@@ -90,11 +31,6 @@ def field_value(text: str, field: str) -> str:
 def section(text: str, heading: str) -> str:
     pattern = rf"^##\s+{re.escape(heading)}\s*$([\s\S]*?)(?=^##\s+|\Z)"
     match = re.search(pattern, text, flags=re.MULTILINE)
-    return match.group(1).strip() if match else ""
-
-
-def frontmatter_value(text: str, key: str) -> str:
-    match = re.search(rf"^{re.escape(key)}:\s*(.+)$", text, flags=re.MULTILINE)
     return match.group(1).strip() if match else ""
 
 
@@ -297,141 +233,6 @@ def project_items() -> list[dict[str, str]]:
     return items
 
 
-def summary_files() -> list[Path]:
-    if not TRANSCRIPTION_DATA_ROOT.exists():
-        return []
-    return sorted(TRANSCRIPTION_DATA_ROOT.glob("*/summaries/*.md"))
-
-
-def summary_date(path: Path, text: str) -> date | None:
-    return (
-        markdown_date(frontmatter_value(text, "date"))
-        or markdown_date(path.name)
-        or datetime.fromtimestamp(path.stat().st_mtime).date()
-    )
-
-
-def summaries_in_window(today: date, days: int = 7) -> list[tuple[Path, str, date]]:
-    start = today - timedelta(days=max(days - 1, 0))
-    in_window: list[tuple[Path, str, date]] = []
-    for path in summary_files():
-        text = read_text(path)
-        dated = summary_date(path, text)
-        if dated and start <= dated <= today:
-            in_window.append((path, text, dated))
-    return in_window
-
-
-def line_score(line: str) -> int:
-    lower = line.lower()
-    return sum(weight for keyword, weight in PAI_PODCAST_KEYWORDS.items() if keyword in lower)
-
-
-def podcast_summary_score(text: str, path: Path) -> int:
-    score = line_score(text)
-    name = path.name.lower().replace("-", " ")
-    score += line_score(name) * 2
-    if "key takeaways" in text.lower():
-        score += 2
-    return score
-
-
-def relevant_podcast_lines(text: str, limit: int = 3) -> list[str]:
-    candidates: list[tuple[int, str]] = []
-    useful_sections = (
-        "Key Takeaways",
-        "Trend Signals",
-        "Actionable Implications",
-        "Open Questions / Uncertainty",
-        "Open Questions",
-    )
-    current_section = ""
-    for line in text.splitlines():
-        stripped = line.strip()
-        heading = re.match(r"^##\s+(.+?)\s*$", stripped)
-        if heading:
-            current_section = heading.group(1).strip()
-            continue
-        if not (stripped.startswith("- ") or stripped.startswith("> ")):
-            continue
-        item = stripped[2:].strip()
-        score = line_score(item)
-        if score:
-            if current_section in useful_sections:
-                score += 3
-            candidates.append((score, item))
-    candidates.sort(key=lambda item: item[0], reverse=True)
-    selected: list[str] = []
-    seen: set[str] = set()
-    for _, line in candidates:
-        normalized = " ".join(line.lower().split())
-        if normalized in seen:
-            continue
-        seen.add(normalized)
-        selected.append(line)
-        if len(selected) >= limit:
-            break
-    return selected
-
-
-def pai_implication(lines: list[str]) -> str:
-    combined = " ".join(lines).lower()
-    if "prompt injection" in combined or "poisoning" in combined or "least agency" in combined or "zero trust" in combined:
-        return "Add an agent-trust check: limit tool/file access, treat untrusted inputs cautiously, and require approval before any external action."
-    if "world model" in combined or "certificate" in combined or "reasoning" in combined or "verification" in combined:
-        return "For substantial PAI outputs, include a compact evidence note with sources, assumptions, confidence, and needed approvals."
-    if "governance" in combined or "guardrail" in combined or "policy" in combined:
-        return "Make PAI boundaries explicit enough to enable useful work while preventing broad or silent autonomy."
-    if "calibration" in combined or "reliab" in combined or "trust" in combined:
-        return "Favor review surfaces and explicit user confirmation over autonomous action."
-    if "memory" in combined or "context" in combined or "second brain" in combined:
-        return "Keep improving durable local context, but make each context file directly useful for a recurring workflow."
-    if "workflow" in combined or "automation" in combined or "automate" in combined:
-        return "Turn repeated manual prompts into small scheduled reviews or website actions."
-    if "agent" in combined or "assistant" in combined:
-        return "Use narrow, named jobs with clear outputs instead of broad always-on agents."
-    return "Consider whether this creates a small, local, low-noise improvement to PAI."
-
-
-def podcast_signals(today: date, limit: int = 6) -> tuple[list[dict[str, object]], int, bool]:
-    source_available = TRANSCRIPTION_DATA_ROOT.exists()
-    summaries = summaries_in_window(today)
-    ranked: list[tuple[int, Path, str, date]] = []
-    for path, text, dated in summaries:
-        score = podcast_summary_score(text, path)
-        lines = relevant_podcast_lines(text)
-        if lines:
-            score += sum(line_score(line) for line in lines)
-        if score >= 12:
-            ranked.append((score, path, text, dated))
-
-    ranked.sort(key=lambda item: (item[0], item[3], item[1].stat().st_mtime), reverse=True)
-    signals: list[dict[str, object]] = []
-    seen_titles: set[str] = set()
-    for score, path, text, dated in ranked:
-        title = frontmatter_value(text, "episode") or title_from_markdown(path)
-        if title in seen_titles:
-            continue
-        lines = relevant_podcast_lines(text)
-        if not lines:
-            continue
-        seen_titles.add(title)
-        signals.append(
-            {
-                "score": score,
-                "podcast": frontmatter_value(text, "podcast") or path.parents[1].name,
-                "episode": title,
-                "date": dated.isoformat(),
-                "path": path.relative_to(TRANSCRIPTION_DATA_ROOT).as_posix(),
-                "lines": lines,
-                "implication": pai_implication(lines),
-            }
-        )
-        if len(signals) >= limit:
-            break
-    return signals, len(summaries), source_available
-
-
 def format_person(item: dict[str, object]) -> str:
     last_date = item["last_date"]
     days = item["days"]
@@ -459,7 +260,6 @@ def build_review(today: date) -> str:
     stale_inbox_items = [item for item in inbox_items if isinstance(item["days"], int) and item["days"] >= 14]
     current_context = read_text(PERSONAL_AI_ROOT / "assistant" / "current-context.md")
     projects = project_items()
-    podcast_items, podcast_summary_count, transcription_source_available = podcast_signals(today)
     missing_paths = missing_memory_paths()
     repeated_decisions = duplicate_decisions()
     completed_work = recently_completed_work(today)
@@ -478,7 +278,6 @@ def build_review(today: date) -> str:
         f"- Missing paths referenced by memory: {len(missing_paths)}",
         f"- Exact duplicate decision statements: {len(repeated_decisions)}",
         f"- Recently completed work files to check for lessons: {len(completed_work)}",
-        f"- Podcast transcription source: {'available' if transcription_source_available else 'missing'}",
         "- Review scope: people, active work, memory, feedback, inbox, current context, projects, and recent Personal AI edits.",
         "",
         "## Suggested Attention This Week",
@@ -634,38 +433,6 @@ def build_review(today: date) -> str:
     else:
         lines.append("No project background found.")
 
-    lines.extend(["", "## Podcast Signals For PAI Improvement", ""])
-    if not transcription_source_available:
-        lines.append(
-            f"Podcast signals were not checked because the configured transcription source does not exist: `{TRANSCRIPTION_DATA_ROOT}`."
-        )
-        lines.append(
-            "Restore that location or set `PAI_TRANSCRIPTION_DATA_ROOT` before running the review."
-        )
-    elif podcast_items:
-        lines.append(
-            f"These are not general podcast summaries. They are signals from the last 7 days of saved podcast summaries ({podcast_summary_count} summary files in scope) that look relevant to making PAI more useful, bounded, and proactive."
-        )
-        lines.append("")
-        for item in podcast_items:
-            lines.extend(
-                [
-                    f"### {item['episode']}",
-                    "",
-                    f"- Podcast: {item['podcast']}",
-                    f"- Episode date: {item['date']}",
-                    f"- Source: `transcription/data/{item['path']}`",
-                    f"- PAI implication: {item['implication']}",
-                    "- Relevant signals:",
-                ]
-            )
-            lines.extend(f"  - {line}" for line in item["lines"])
-            lines.append("")
-    else:
-        lines.append(
-            f"No podcast summary signals found for PAI improvement in `{TRANSCRIPTION_DATA_ROOT}`."
-        )
-
     lines.extend(["", "## Recent Personal AI Edits", ""])
     for path in recent_files(today):
         modified = datetime.fromtimestamp(path.stat().st_mtime).strftime("%Y-%m-%d %H:%M")
@@ -677,58 +444,13 @@ def build_review(today: date) -> str:
             "",
             "## How To Use This",
             "",
-            "- For a call, use the People / Calls panel in the Personal AI website.",
-            "- For cleanup, open the files listed above and use `Edit` only when needed.",
+            "- For a call, open the linked person file and use its open loops and next-call prep.",
+            "- For cleanup, open the files listed above and update only what needs attention.",
             "- Keep this review as a prompt to act, not as another place to store durable notes.",
             "",
         ]
     )
     return "\n".join(lines)
-
-
-def prune_reviews(keep: int = 2) -> None:
-    """Keep only the newest reviews; older ones stay retrievable via git history."""
-    reviews = sorted(REVIEWS_ROOT.glob("*-weekly-pai-review.md"))
-    for path in reviews[:-keep] if keep else reviews:
-        path.unlink()
-        print(f"Pruned old review: {path.name}")
-
-
-def commit_personal_ai(today: date) -> None:
-    """Optional git checkpoint for advanced users who explicitly enable it."""
-
-    if os.environ.get("PAI_WEEKLY_REVIEW_AUTO_COMMIT") != "1":
-        print("Auto-commit skipped: set PAI_WEEKLY_REVIEW_AUTO_COMMIT=1 to enable.")
-        return
-
-    def git(*args: str) -> subprocess.CompletedProcess[str]:
-        return subprocess.run(
-            ["git", "-C", str(PERSONAL_AI_ROOT), *args],
-            capture_output=True,
-            text=True,
-        )
-
-    if git("rev-parse", "--is-inside-work-tree").returncode != 0:
-        print("Auto-commit skipped: the Personal AI folder is not inside a git repository.")
-        return
-    if not git("status", "--porcelain", "--", ".").stdout.strip():
-        print("Auto-commit: no Personal AI changes to commit.")
-        return
-    git("add", "-A", "--", ".")
-    # The trailing pathspec limits the commit to this folder, leaving anything
-    # staged elsewhere in the repository untouched.
-    result = git(
-        "commit",
-        "-m",
-        f"Weekly PAI review auto-commit {today.isoformat()}",
-        "--",
-        ".",
-    )
-    if result.returncode == 0:
-        print(f"Auto-commit: committed personal-ai changes ({today.isoformat()}).")
-    else:
-        detail = result.stderr.strip() or result.stdout.strip()
-        print(f"Auto-commit failed: {detail}")
 
 
 def main() -> None:
@@ -737,8 +459,6 @@ def main() -> None:
     output = REVIEWS_ROOT / f"{today.isoformat()}-weekly-pai-review.md"
     output.write_text(build_review(today), encoding="utf-8")
     print(output)
-    prune_reviews()
-    commit_personal_ai(today)
 
 
 if __name__ == "__main__":

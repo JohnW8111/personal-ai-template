@@ -37,8 +37,9 @@ the triggers, resolution rules, output behavior, and examples below live here.
 
 - Briefly confirm: `PAI context loaded.`
 - Do not dump the context back to the user.
-- Do not treat this as global unless the user keeps using the switch.
-- If the user says `PAI off` or `Personal AI off`, stop using this context unless asked again.
+- Keep this context active for the rest of the current workspace conversation.
+- A new conversation starts without Personal AI context until the user invokes the switch again.
+- If the user says `PAI off` or `Personal AI off`, stop using this context in future requests. Explain that it cannot erase Personal AI material already present in the chat if that distinction matters to the request.
 
 ## Boundaries
 

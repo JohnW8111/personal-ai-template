@@ -114,9 +114,11 @@ If no skill fits, the assistant should handle the request normally while still u
 
 ## Scope
 
-This is opt-in per request or session. It is not global.
+This is opt-in. Once the user says `PAI on`, keep the Personal AI context active
+for the rest of that workspace conversation, until they say `PAI off`.
 
-If the user does not invoke the switch, the assistant should work normally.
+Every new conversation starts off. If the user does not invoke the switch, the
+assistant should work normally.
 
 ## Turn It Off
 
@@ -126,7 +128,9 @@ Use:
 PAI off
 ```
 
-or simply omit the switch in a future request.
+This stops future reading or use of Personal AI files in the current
+conversation. It cannot erase Personal AI material already present in the chat;
+start a new conversation for a clean separation.
 
 ## Legacy Alias
 
