@@ -25,17 +25,17 @@ you need. No other software, and no technical skills.
 
 **Step 1 — Get your copy of this folder.**
 The easiest way: click this direct download link —
-[**Download Personal AI (ZIP)**](https://github.com/JohnW8111/personal-ai-template/archive/refs/heads/main.zip)
-— and a ZIP file lands in your Downloads folder. (Or, on the GitHub page,
-click the green **Code** button and choose **Download ZIP** — same thing. Do
-not use Fork, clone, or "Use this template" unless you already understand
-GitHub and know how to keep your filled-in copy private.)
+[**Download Personal AI**](https://github.com/JohnW8111/personal-ai-template/archive/refs/heads/main.zip).
+(Or, on the GitHub page, click the green **Code** button and choose
+**Download ZIP** — same thing. Do not use Fork, clone, or "Use this template"
+unless you already understand GitHub and know how to keep your filled-in copy
+private.)
 
-Open your Downloads folder and double-click the ZIP file — it becomes a normal
-folder named `personal-ai-template-main`. Move that whole folder somewhere
-easy to find, like your **Documents** folder, and rename it something
-friendly, like `Personal AI`. (You move the whole folder — never just one file
-out of it.)
+Then look in your Downloads for a folder named `personal-ai-template-main`.
+Some browsers deliver it as a ZIP file with that name instead — double-click
+the ZIP and it becomes the folder. Move that whole folder somewhere easy to
+find, like your **Documents** folder, and rename it something friendly, like
+`Personal AI`. (You move the whole folder — never just one file out of it.)
 
 **Step 2 — Connect your AI app to the folder.**
 - **Claude desktop app**: open Cowork and, when it asks which folder to work
