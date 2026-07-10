@@ -16,7 +16,7 @@ We call the system **PAI** (Personal AI) for short.
 One of these AI desktop apps, already installed and working:
 
 - **Claude** (the desktop app, using Cowork), or
-- **Codex** (the desktop app)
+- **ChatGPT** (the desktop app — you will use its **Codex** section)
 
 If you can open one of those apps and have a conversation, you have everything
 you need. No other software, and no technical skills.
@@ -40,8 +40,10 @@ find, like your **Documents** folder, and rename it something friendly, like
 **Step 2 — Connect your AI app to the folder.**
 - **Claude desktop app**: open Cowork and, when it asks which folder to work
   in, choose the folder you just moved.
-- **Codex desktop app**: open a new session and choose the folder you just
-  moved as the place to work.
+- **ChatGPT desktop app**: select **Codex** at the top of the app — not Chat.
+  Codex is the part that can work inside your folder; regular Chat cannot see
+  your files, so Personal AI will not work there. Then choose the folder you
+  just moved as the place to work.
 
 The connection is per session — when you come back tomorrow, pick the same
 folder again.
