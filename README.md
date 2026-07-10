@@ -104,16 +104,16 @@ assistant handles the mechanics.
 - `memory/` — decisions and lessons that accumulate over time
 - `inbox/` — quick idea capture, sorted weekly
 - `skills/` — step-by-step workflows the assistant can follow
-- `work/`, `reviews/`, `tools/`, `ui/`, `adapters/` — supporting pieces the
+- `work/`, `reviews/`, `tools/`, `adapters/` — supporting pieces the
   assistant uses; you can ignore them
 
 The one file worth knowing about: `ON.md` is the instruction sheet the
 assistant follows when you say `PAI on`. The assistant reads it; you don't
 need to.
 
-**Mac bonus:** double-clicking `launch-personal-ai.command` opens a small
-private website (only visible on your computer) for browsing your files and
-jotting ideas. Entirely optional — everything works through chat.
+Nothing in this folder installs anything or runs on its own. Your AI app is
+the only program involved — every file here is plain text you could open in
+any editor.
 
 ## Keeping your information private
 

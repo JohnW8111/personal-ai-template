@@ -59,8 +59,7 @@ the review.
 
 ## Output
 
-A single dated Markdown review under `reviews/`. The local UI can also list and
-open recent reviews.
+A single dated Markdown review under `reviews/`.
 
 ## Verification
 
@@ -72,8 +71,11 @@ open recent reviews.
 
 ## Agent Notes
 
-- Codex and Claude both run the same Python generator; do not re-implement the
-  review by hand.
+- Codex and Claude both run the same Python generator; prefer it over
+  re-implementing the review by hand.
+- If Python is not available on the machine, do not install anything. Instead,
+  read the same source files yourself and produce a review with the same
+  sections, clearly noting it was generated manually.
 - Do not store durable notes in the review. Promote durable lessons to
   `memory/`, relationship updates to `people/`, and context to `background/`.
 - If the generator errors or a referenced path is missing, report it rather than

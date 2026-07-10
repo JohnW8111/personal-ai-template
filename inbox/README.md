@@ -14,8 +14,6 @@ PAI inbox: idea or thought
 
 The assistant should append it to this file under `## Ideas` with today's date.
 
-The local PAI website also has a one-line Quick Capture box. Enter the thought and press `Add idea`.
-
 ## What Belongs Here
 
 - Ideas for improving PAI.
