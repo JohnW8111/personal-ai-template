@@ -709,13 +709,13 @@ def commit_personal_ai(today: date) -> None:
         )
 
     if git("rev-parse", "--is-inside-work-tree").returncode != 0:
-        print("Auto-commit skipped: personal-ai is not inside a git repository.")
+        print("Auto-commit skipped: the Personal AI folder is not inside a git repository.")
         return
     if not git("status", "--porcelain", "--", ".").stdout.strip():
-        print("Auto-commit: no personal-ai changes to commit.")
+        print("Auto-commit: no Personal AI changes to commit.")
         return
     git("add", "-A", "--", ".")
-    # The trailing pathspec limits the commit to personal-ai/, leaving anything
+    # The trailing pathspec limits the commit to this folder, leaving anything
     # staged elsewhere in the repository untouched.
     result = git(
         "commit",

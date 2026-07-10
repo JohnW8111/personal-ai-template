@@ -1,12 +1,12 @@
 # Codex Skill Adapter Notes
 
-Canonical skills live in `personal-ai/skills/`.
+Canonical skills live in `skills/` inside the Personal AI folder.
 
 Codex can use those files directly when this folder is in the working context. If a skill should become an installed Codex skill later, create a thin copy or generated adapter under `~/.codex/skills/` that points back to the canonical workflow.
 
 ## Adapter Principle
 
-- Canonical workflow: `personal-ai/skills/<skill>/SKILL.md`
+- Canonical workflow: `skills/<skill>/SKILL.md`
 - Codex-specific wrapper: only when needed for auto-triggering, bundled scripts, or UI metadata.
 - Do not edit the Codex wrapper in a way that diverges from the canonical skill without updating the canonical skill first.
 
@@ -18,7 +18,7 @@ During a Codex session, type:
 PAI on: <your request>
 ```
 
-Codex should read `personal-ai/ON.md`, load the assistant context, and use relevant background, memory, or skills for that request. This keeps PAI opt-in rather than global.
+Codex should read `ON.md` in the selected Personal AI folder, load the assistant context, and use relevant background, memory, or skills for that request. This keeps PAI opt-in rather than global.
 
 `PAI on` always refers to this directory. Codex must read `assistant/`
 first. If the directory is unavailable, ask where it moved.
@@ -35,4 +35,4 @@ For an installed Codex skill, use:
   references/    # optional
 ```
 
-The installed `SKILL.md` should either mirror the canonical file or clearly state that `personal-ai/skills/<skill>/SKILL.md` is the source of truth.
+The installed `SKILL.md` should either mirror the canonical file or clearly state that `skills/<skill>/SKILL.md` in the selected Personal AI folder is the source of truth.

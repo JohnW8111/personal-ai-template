@@ -22,7 +22,7 @@ Load the user's local Personal AI context only when requested.
 
 ## Procedure
 
-Read `personal-ai/ON.md` and follow its activation contract exactly. `ON.md`
+Read `ON.md` in the folder selected for this session and follow its activation contract exactly. `ON.md`
 is the single source of truth for the loading order, the capture commands
 (`PAI remember:`, `PAI feedback:`, `PAI inbox:`), substantial-task rules, and
 skill selection. Do not restate or re-derive the contract from this file; only
@@ -30,10 +30,8 @@ the triggers, resolution rules, output behavior, and examples below live here.
 
 ## System Resolution
 
-- `PAI on` resolves to the canonical `personal-ai/` root identified by the
-  activation contract or installed adapter.
-- If the canonical `personal-ai/` directory is unavailable, ask the user where
-  it moved instead of guessing.
+- `PAI on` resolves to the folder containing `ON.md` in the selected workspace.
+- If that folder is unavailable, ask the user where it moved instead of guessing.
 
 ## Output Behavior
 
@@ -44,7 +42,7 @@ the triggers, resolution rules, output behavior, and examples below live here.
 
 ## Boundaries
 
-Follow `personal-ai/assistant/boundaries.md`.
+Follow `assistant/boundaries.md` in the selected Personal AI folder.
 
 ## Examples
 

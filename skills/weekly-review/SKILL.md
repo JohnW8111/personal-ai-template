@@ -22,10 +22,10 @@ the review.
 1. Run the generator from the workspace root:
 
    ```bash
-   python personal-ai/tools/weekly_review.py
+   python tools/weekly_review.py
    ```
 
-2. The script writes `personal-ai/reviews/YYYY-MM-DD-weekly-pai-review.md` and
+2. The script writes `reviews/YYYY-MM-DD-weekly-pai-review.md` and
    prints the path. It reads `people/active/`, `work/active/`,
    `work/completed/`, `memory/`, `inbox/README.md`,
    `assistant/current-context.md`, `background/projects.md`, and the configured

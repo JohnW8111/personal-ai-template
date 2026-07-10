@@ -1,6 +1,6 @@
 # Claude Code Skill Adapter Notes
 
-Canonical skills live in `personal-ai/skills/`.
+Canonical skills live in `skills/` inside the Personal AI folder.
 
 Claude Code can read these skill files as normal Markdown workflow instructions. If a workflow needs to be installed into Claude-specific directories later, keep the canonical version here and make the Claude-specific version a wrapper.
 
@@ -8,7 +8,7 @@ For Claude/Cowork execution details - folder access, the capability map to docum
 
 ## Adapter Principle
 
-- Canonical workflow: `personal-ai/skills/<skill>/SKILL.md`
+- Canonical workflow: `skills/<skill>/SKILL.md`
 - Claude-specific wrapper: only when needed for Claude Code discovery or command conventions.
 - Do not let Claude-specific wording become the source of truth unless the canonical skill is updated too.
 
@@ -20,7 +20,7 @@ During a Claude Code session, type:
 PAI on: <your request>
 ```
 
-Claude should read `personal-ai/ON.md`, load the assistant context, and use relevant background, memory, or skills for that request. This keeps PAI opt-in rather than global.
+Claude should read `ON.md` in the selected Personal AI folder, load the assistant context, and use relevant background, memory, or skills for that request. This keeps PAI opt-in rather than global.
 
 `PAI on` always refers to this directory. Claude must read `assistant/`
 first. If the directory is unavailable, ask where it moved.

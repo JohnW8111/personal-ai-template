@@ -4,12 +4,12 @@ Use this file as the opt-in switch for the personal AI context.
 
 ## Canonical System
 
-`PAI on` always means the `personal-ai/` directory containing this file.
-The first context layer is `personal-ai/assistant/`, and all Markdown files in
-that directory must be read before the request is interpreted.
+`PAI on` always means the folder containing this `ON.md` file. The first
+context layer is `assistant/`, and all Markdown files in that directory must be
+read before the request is interpreted.
 
-If this `personal-ai/` directory cannot be found, ask where it moved
-instead of silently substituting another directory.
+If this folder cannot be found, ask where it moved instead of silently
+substituting another directory.
 
 ## Switch Phrase
 
@@ -31,18 +31,18 @@ it and starts the first-run interview in `skills/setup/SKILL.md`.
 
 When the user invokes `PAI on`, the assistant should:
 
-1. Resolve `PAI on` to this `personal-ai/` directory.
-2. Read every Markdown file in `personal-ai/assistant/` before interpreting the request.
-3. Read `personal-ai/skills/README.md` and decide whether a shared skill matches the request.
+1. Resolve `PAI on` to the folder containing this `ON.md` file.
+2. Read every Markdown file in `assistant/` before interpreting the request.
+3. Read `skills/README.md` and decide whether a shared skill matches the request.
 4. If a skill matches, read that skill's `SKILL.md` and use it as the canonical workflow.
-5. Search `personal-ai/background/` only for relevant durable context.
-6. Search `personal-ai/memory/` using the request's project, person, domain, workflow, and constraint terms.
-7. Search `personal-ai/people/` for relationship or call context when relevant.
+5. Search `background/` only for relevant durable context.
+6. Search `memory/` using the request's project, person, domain, workflow, and constraint terms.
+7. Search `people/` for relationship or call context when relevant.
 8. Use tool-specific adapters only when the canonical skill needs Codex- or Claude-specific execution details.
 9. For a substantial task, state a small set of testable success criteria and create or update a work file only when durable task state will help.
-10. If the user says `PAI remember: <memory>`, classify and record it using `personal-ai/memory/README.md`.
-11. If the user gives explicit `PAI feedback`, append it to `personal-ai/memory/feedback.md`.
-12. If the user says `PAI inbox: <thought>`, append a dated unchecked entry under `## Ideas` in `personal-ai/inbox/README.md`.
+10. If the user says `PAI remember: <memory>`, classify and record it using `memory/README.md`.
+11. If the user gives explicit `PAI feedback`, append it to `memory/feedback.md`.
+12. If the user says `PAI inbox: <thought>`, append a dated unchecked entry under `## Ideas` in `inbox/README.md`.
 13. Briefly say that PAI context is loaded, name any skill being used, then proceed with the task.
 
 ## Substantial Tasks
@@ -76,7 +76,7 @@ The supported form is:
 PAI remember: concise fact, preference, decision, or lesson
 ```
 
-Classify the entry using `personal-ai/memory/README.md`. Record it directly when
+Classify the entry using `memory/README.md`. Record it directly when
 the destination is clear. If it conflicts with an active decision, mark the old
 decision superseded and link the two entries. If durability or destination is
 unclear, place it in the inbox for review. Do not infer memory from ordinary

@@ -34,8 +34,8 @@ private.)
 Then look in your Downloads for a folder named `personal-ai-template-main`.
 Some browsers deliver it as a ZIP file with that name instead — double-click
 the ZIP and it becomes the folder. Move that whole folder somewhere easy to
-find, like your **Documents** folder, and rename it something friendly, like
-`Personal AI`. (You move the whole folder — never just one file out of it.)
+find, like your **Documents** folder, and keep its name as-is. (You move the
+whole folder — never just one file out of it.)
 
 **Step 2 — Connect your AI app to the folder.**
 - **Claude desktop app**: open Cowork and, when it asks which folder to work
