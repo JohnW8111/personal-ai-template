@@ -40,18 +40,28 @@ find, like your **Documents** folder, and keep its name as-is. (You move the
 whole folder — never just one file out of it.)
 
 **Step 2 — Connect your AI app to the folder.**
-- **Claude desktop app**: open Cowork and, when it asks which folder to work
-  in, choose the folder you just moved.
+- **Claude desktop app**: open Cowork and create a project using the existing
+  folder you just moved. If Cowork asks which file to use as context, choose
+  `START-HERE.md`. This is more reliable than attaching the folder to an
+  ordinary conversation with the **+ Folder** button. If you already used
+  **+ Folder**, you can still continue — use the Claude message in Step 3.
 - **ChatGPT desktop app**: select **Codex** at the top of the app — not Chat.
   Codex is the part that can work inside your folder; regular Chat cannot see
   your files, so Personal AI will not work there. Then choose the folder you
   just moved as the place to work.
 
-The folder connection is per session — when you come back tomorrow, pick the
-same folder again and type `PAI on` when you want to use it.
+When you come back later, work in the same Cowork project or choose the same
+folder in Codex, then type `PAI on` when you want to use it.
 
 **Step 3 — Let the assistant interview you.**
-In the chat, type:
+
+In **Claude Cowork**, paste this first message:
+
+```text
+Use only the connected folder personal-ai-template-main. This is the Personal AI template in that folder, not Daniel Miessler's PAI or LifeOS. Do not search the web, download, or install anything for setup. Read START-HERE.md and follow it. Then begin the PAI setup interview one question at a time.
+```
+
+In **Codex**, type the same simple command as before:
 
 ```text
 PAI setup

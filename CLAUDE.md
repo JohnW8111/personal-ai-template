@@ -3,6 +3,17 @@
 This folder is the user's Personal AI (PAI) system. This file exists so that any
 Claude session with this folder connected understands what the PAI switch means.
 
+## Important: PAI means this folder, not an outside product
+
+In this folder, **PAI** means only the Personal AI system contained in this
+folder. It does not mean Daniel Miessler's Personal AI Infrastructure, LifeOS,
+or any other product or project with the same initials.
+
+When the user says `PAI setup`, do not search the web for another PAI system,
+download an installer, or try to install external software. Everything needed
+for setup is already in this folder. Read `ON.md`, then
+`skills/setup/SKILL.md`, and begin the interview one question at a time.
+
 ## Important: PAI is opt-in. Do not auto-load it.
 
 Do NOT read or apply the PAI context by default just because this folder is
